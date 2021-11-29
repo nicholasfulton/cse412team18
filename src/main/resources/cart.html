@@ -1,18 +1,44 @@
 <!DOCTYPE HTML>
 <html xmlns:th="https://www.thymeleaf.org">
+
+<style type="text/css">
+	label {
+		display: inline-block;
+		width: 200px;
+		margin: 5px;
+		text-align: left;
+</style>
+
 <head> 
     <title>The Coolest Store of all time</title>
+    
+    <style>
+    	body {background-color: #f0f6f7; margin:20px;}
+    </style>
+    
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>The Store</h1>
-	<p>Ready to add Items to your Cart</p>
-    <form action="#" th:action="@{/greeting}" th:object="${greeting}" method="post">
-    	<p>Enter Product Name: <input type="text" th:field="*{id}" /></p>
-    	<p>or</p>
-    	<p> </p>
-        <p>Enter Product ID: <input type="text" th:field="*{content}" /></p>
-        <p><input type="submit" value="Add Item" /> <input type="reset" value="Ready to Pay" /></p>
-    </form>
+	<center>
+		<h1 style="background-color:#143d59;color:white;Font-family:impact">The Store</h1>
+		<h3 style="Font-family:calibri">Your Shopping Cart</h3>
+	
+			<form action="#" th:action="@{/greeting}" th:object="${greeting}" method="post">
+	    	<label>Enter Product Name:</label>
+	    	<input type="text" th:field="*{id}" />
+	    	<p>or</p>
+	        <label>Enter Product ID: </label>
+	        <input type="text" th:field="*{content}" />
+	        
+	        
+	        <p><input type="submit" value="Add Item" /> </P>
+
+	    </form>
+	    
+	    <a href="paymentSection.html">
+	        	<button>Ready to Pay</button>
+	        </a>
+	    
+	</center>
 </body>
 </html>
