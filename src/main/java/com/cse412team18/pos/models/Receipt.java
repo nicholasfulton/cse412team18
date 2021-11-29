@@ -32,16 +32,11 @@ public class Receipt {
     @Column(name = "`SaleDate`")
     private Date saleDate;
 
-    // @ManyToMany
-    // private List<Product> products;
-    // @ManyToOne(optional = true)
-    // private Member member;
+    @OneToMany(fetch = FetchType.EAGER)
+    public ReceiptProduct[] products;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private ReceiptProduct[] products;
-
-    @ManyToOne(optional = true, fetch = FetchType.EAGER)
-    private MemberReceipt member;
+    @OneToMany(fetch = FetchType.EAGER)
+    public MemberReceipt[] member;
 
     public int getReceiptId() {
         return this.receiptId;

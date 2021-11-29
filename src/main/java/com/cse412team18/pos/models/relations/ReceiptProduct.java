@@ -8,10 +8,12 @@ import com.cse412team18.pos.models.Receipt;
 @Entity
 @Table(name = "`ReceiptProduct`")
 public class ReceiptProduct {
-    @OneToOne(optional = false, mappedBy = "`ReceiptID`", fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "`ReceiptID`")
     private Receipt receipt;
 
-    @OneToOne(optional = false, mappedBy = "`ProductID`", fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "`ProductID`")
     private Product product;
 
     @Column(name = "`Count`")

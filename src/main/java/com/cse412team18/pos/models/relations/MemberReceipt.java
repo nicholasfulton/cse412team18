@@ -8,12 +8,13 @@ import com.cse412team18.pos.models.Receipt;
 @Entity
 @Table(name = "`MemberReceipt`")
 public class MemberReceipt {
-    @OneToOne(optional = false, mappedBy = "`ReceiptID`", fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "`ReceiptID`")
     private Receipt receipt;
 
-    @OneToOne(optional = false, mappedBy = "`MemberID`", fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "`MemberID`")
     private Member member;
-
 
     public Receipt getReceipt() {
         return this.receipt;

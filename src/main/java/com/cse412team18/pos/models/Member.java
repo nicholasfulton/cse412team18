@@ -2,6 +2,8 @@ package com.cse412team18.pos.models;
 
 import javax.persistence.*;
 
+import com.cse412team18.pos.models.relations.MemberReceipt;
+
 @Entity
 @Table(name = "`Member`")
 public class Member {
@@ -27,9 +29,8 @@ public class Member {
     @Column(name = "`Address`")
     private String address;
 
-    // @ManyToMany
-    // public List<Receipt> receipts;
-
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
+    public MemberReceipt[] memberReceipts;
 
     public String getMemberId() {
         return this.memberId;

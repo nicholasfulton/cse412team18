@@ -8,10 +8,12 @@ import com.cse412team18.pos.models.Vendor;
 @Entity
 @Table(name = "`VendorProduct`")
 public class VendorProduct {
-    @OneToOne(optional = false, mappedBy = "`Product_ProductID`", fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "`Product_ProductID`")
     private Product product;
 
-    @OneToOne(optional = false, mappedBy = "`Vendor_VendorID`", fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "`Vendor_VendorID`")
     private Vendor vendor;
 
     public Product getProduct() {

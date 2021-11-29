@@ -21,16 +21,19 @@ public class Vendor {
 
     @Column(name = "`Name`", columnDefinition = "text")
     private String name;
+
     @Column(name = "`Country`", columnDefinition = "text")
     private String country;
+
     @Column(name = "`PhoneNumber`", columnDefinition = "text")
     private String phoneNumber;
+    
     @Type(type = "string-array")
     @Column(name = "`Category`", columnDefinition = "text[]")
     private String[] category;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "Product_ProductID")
-    private Product[] products;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "vendor")
+    public VendorProduct[] vendorProducts;
 
     public int getVendorId() {
         return this.vendorId;

@@ -2,6 +2,9 @@ package com.cse412team18.pos.models;
 
 import javax.persistence.*;
 
+import com.cse412team18.pos.models.relations.ReceiptProduct;
+import com.cse412team18.pos.models.relations.VendorProduct;
+
 @Entity
 @Table(name = "`Product`")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -22,9 +25,11 @@ public class Product {
     @Column(name = "`DisplayName`")
     private String displayName;
 
-    // @ManyToOne
-    // public Vendor vendor;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    public VendorProduct[] vendorProducts;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    public ReceiptProduct[] receiptProducts;
 
     public int getProductId() {
         return this.productId;
