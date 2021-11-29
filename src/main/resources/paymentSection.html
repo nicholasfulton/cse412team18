@@ -1,19 +1,45 @@
 <!DOCTYPE HTML>
 <html xmlns:th="https://www.thymeleaf.org">
+
+<style type="text/css">
+	label {
+		display: inline-block;
+		width: 300px;
+		margin: 5px;
+		text-align: left;
+</style>
+
 <head> 
     <title>The Coolest Store of all time</title>
+    
+    <style>
+    	body {background-color: #f0f6f7; margin:20px;}
+    </style>
+    
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>The Store</h1>
-    <form action="#" th:action="@{/greeting}" th:object="${greeting}" method="post">
-    	<p>Receipt Section </p>
-    	<p>Total: </p>
-    	<p>Payment Option(cash, debit, credit)<input type = "text" th:field="*{id}" /></p>
-        <p>Pin number (if credit/debit): <input type = "text" th:field="*{id}" /></p>
-        <p>Insert cash (if cash)</p>
-        <p><input type="reset" value="Pay" /></p>
-        
-    </form>
+	<center>
+		<h1 style="background-color:#143d59;color:white;Font-family:impact">The Store</h1>
+    	<form action="#" th:action="@{/greeting}" th:object="${greeting}" method="post">
+	    	<h3 style="Font-family:calibri">Your Payment Method</h3>
+	    	<label>Total: $</label>
+	    	<p></p>
+	    	<label>Payment Option(cash, debit, credit):</label>
+	    	<input type = "text" th:field="*{id}" /></p>
+	        <label>Last Four Digits (Credit/Debit): </label>
+	        <input type = "text" th:field="*{id}" /></p>
+	        <label>Total Inserted Cash(Cash):</label>
+	        <input type = "text" th:field="*{id}" /></p>
+	</form>        
+	
+	<a href="receiptPage.html">
+		<button>Pay</button>
+	</a>
+	
+    </center>
+    
+    
+    
 </body>
 </html>
