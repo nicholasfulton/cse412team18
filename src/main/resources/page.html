@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head> 
+    <title>The Coolest Store of all time</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>The Store</h1>
+    <form action="#" th:action="@{/inputForm}" th:object="${inputForm}" method="post">
+    	<p>Are you a member? Please enter phone number: </p>
+    	<p>Ex. +1234567890</p>
+    	<p>		<input type = "text" th:field="*{id}" /></p>
+    	<p>If not a member, then continue</p>
+    	<p><input type="submit" value="Continue" /></p>
+    	
+    </form>
+</body>
+</html>
