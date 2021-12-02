@@ -2,44 +2,76 @@
 <html lang="en">
 
 <head> 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+	
     <title>The Coolest Store of all time</title>
+    
     <style>
 		label {
-			display: inline-block;
-			width: 200px;
-		}
+		display:inline-block;
+		width:200px;}
 
-    	body { 
-			background-color: #f0f6f7;
-			margin: 20px;
-		}
+    	body {background-color: #f0f6f7; margin:20px;}
 
 		.text-center {
-			text-align: center;
-		}
+			text-align: center;}
+		
     </style>
-    	
+    	 	
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
 </head>
 
 <body>
-	<div class="text-center">
-		<h1 style="background-color:#143d59;color:white;Font-family:impact">The Store</h1>
-		<h3 style="Font-family:calibri"> Welcome to The Store! </h3>
 
-    
-    	<p> Are you a member? Please enter phone number: </p>
-    	<label>Ex. +1234567890</label>
-    	
-    	<label> If not a member, then just continue</label>
-    	<p></p>
-    
-    <a href="/cart.html">
-		<button>Continue</button>
-	</a>
-    
-    </div>
-    
+	<div class="container">
+	
+		<div class="text-center">
+		
+			<h1 style="background-color:#143d59;color:white;Font-family:impact">The Store</h1>
+			<h3 style="Font-family:calibri"> Welcome to The Store! </h3>
+		
+			<p> Are you a member? Please enter phone number: </p>
+	    	<p>Ex. +1234567890</p>
+		
+			<form action="/index">
+			
+				<div class="form-group">
+				
+					<label for="phoneNumber"></label>
+					
+					<div class="text-center">
+					
+						<input type="phoneNumber" class="form-control" id="phoneNumber" placeholder="Enter Phone Number" name="phoneNumber">
+					
+						<button type="submit" class="btn btn-primary">Submit</button>
+						
+					</div>
+					
+				</div>	
+				
+			</form>
+			
+		</div>
+		
+	</div>
+	
+	<p></p>
+	
+	<div class="text-center">
+	
+		<label> if not a member, then continue</label>
+		
+		<p></p>
+	
+		<a href="/cart.html">
+		
+				<button>Continue</button>
+		</a>
+		
+	</div>
+		
 
 </body>
 
