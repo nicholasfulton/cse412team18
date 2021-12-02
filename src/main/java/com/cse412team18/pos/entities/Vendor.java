@@ -88,12 +88,4 @@ public class Vendor implements Serializable {
     public void setVendorProducts(Set<VendorProduct> vendorProducts) {
         this.vendorProducts = vendorProducts;
     }
-
-    public Set<Product> getProducts() {
-        Set<Product> products = new HashSet<>();
-        for (var vendorProduct : vendorProducts) {
-            products.add(vendorProduct.getProduct());
-        }
-        return products;
-    }
 }
