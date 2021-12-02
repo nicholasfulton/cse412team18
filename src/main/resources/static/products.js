@@ -1,5 +1,5 @@
 $(function () {
-    //localStorage.clear();
+    localStorage.clear();
 
     $.get('/product/all', (data) => {
         var tbody = $('#products');
@@ -12,15 +12,18 @@ $(function () {
             var td = $('<td/>')
                 .text(item.price/100 + " ")
                 .appendTo(tr);
-            var td = $('<td/>')
+            var td = $('<td>')
                 .text(item.stockCount + " ")
                 .appendTo(tr);
 
-            var td = $('<a/>')
+            var td = $('<td/ style="text-align: center">')
+                .appendTo(tr);
+
+            $('<a/>')
                 .text("Add")
                 .attr("href", "#")
                 .click(item.id, click)
-                .appendTo(tr);
+                .appendTo(td);
            
         });
     });
