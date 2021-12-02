@@ -1,6 +1,6 @@
 package com.cse412team18.pos.repositories;
 
-import com.cse412team18.pos.models.Vendor;
+import com.cse412team18.pos.entities.Vendor;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
