@@ -1,5 +1,5 @@
 $(function () {
-    localStorage.clear();
+    //localStorage.clear();
 
     $.get('/product/all', (data) => {
         var ul = $('#itemlist');

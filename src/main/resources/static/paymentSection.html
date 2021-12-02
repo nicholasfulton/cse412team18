@@ -26,7 +26,7 @@
 	</style>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
+	<script src="paymentSection.js"></script>
 </head>
 
 <body>
@@ -50,10 +50,11 @@
 				
 					<label for="paymentMethod">Enter Four Last Digits (Credit/Debit): </label>
 					
-					<input type = "text" class="form-control id="paymentMethod" placeholder="Enter Payment Method" name="paymentMethod">
+					<input type = "text" class="form-control" id="paymentMethod" placeholder="Enter Payment Method" name="paymentMethod">
 						
-					<button type="submit" class="btn btn-primary">Submit</button>
+					<button type="submit" onclick="checkPay(document.getElementsByName('paymentMethod')[0].value)" class="btn btn-primary">Submit</button>
 				
+					<p id="invalid"></p>
 				</div>
 						
 			</div>
@@ -72,10 +73,12 @@
 				
 					<label for="paymentMethod"> Enter Quantity (Cash): </label>
 					
-					<input type = "text" class="form-control id="paymentMethod" placeholder="Enter Payment Method" name="paymentMethod">
+					<input type = "text" class="form-control" id="paymentMethodCash" placeholder="Enter Payment Method" name="paymentMethod">
 						
-					<button type="submit" class="btn btn-primary">Submit</button>
+					<button type="submit" onclick="checkCash(document.getElementsByName('paymentMethodCash')[0].value)" class="btn btn-primary">Submit</button>
 				
+					<p>x. 19.99</p>
+					<p id="notEnough"></p>
 				</div>
 						
 			</div>
@@ -85,7 +88,7 @@
 	</div>
 	
 	<div class="text-center">
-			<h2>Total: $ ___</h2>
+			<h2>Total: $<span id = "totalPrice"></h2>
 		</div>
 	
 </body>

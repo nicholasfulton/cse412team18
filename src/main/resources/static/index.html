@@ -20,7 +20,7 @@
     </style>
     	 	
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    
+    <script src="index.js"></script>
 </head>
 
 <body>
@@ -45,8 +45,9 @@
 					
 						<input type="phoneNumber" class="form-control" id="phoneNumber" placeholder="Enter Phone Number" name="phoneNumber">
 					
-						<button type="submit" class="btn btn-primary">Submit</button>
-						
+						<a href="/products.html">
+							<button type="submit" onclick="member(document.getElementsByName('phoneNumber')[0].value)" class="btn btn-primary">Submit</button>
+						</a>
 					</div>
 					
 				</div>	
@@ -65,7 +66,7 @@
 		
 		<p></p>
 	
-		<a href="/cart.html">
+		<a href="/products.html">
 		
 				<button>Continue</button>
 		</a>
