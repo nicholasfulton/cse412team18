@@ -2,12 +2,15 @@
 <html lang="en">
 
 <head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="paymentSection.js"></script>
+
 	<title>The Coolest Store of all time</title>
 
 	<style>
 		label {
 			display: inline-block;
-			width: 300px;
+			width: 150px;
 			margin: 5px;
 			text-align: left;
 		}
@@ -23,28 +26,68 @@
 	</style>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
 </head>
 
 <body>
+	
 	<div class="text-center">
+	
 		<h1 style="background-color:#143d59;color:white;Font-family:impact">The Store</h1>
-
 		<h3 style="Font-family:calibri">Your Payment Method</h3>
-		<label>Total: $</label>
-		<p></p>
-		<label>Payment Option(cash, debit, credit):</label>
-
-		<label>Last Four Digits (Credit/Debit): </label>
-
-		<label>Total Inserted Cash(Cash):</label>
-
-		</form>
-
-		<a href="receiptPage.html">
-			<button>Pay</button>
-		</a>
-
+		
 	</div>
+	
+	<div id="checkout" align="center"></div>
+	
+	<div class="container">
+	
+		<form id="paymentCard">
+			
+			<div class="form-group">
+			
+				<div class="text-center">
+				
+					<label for="paymentMethod">Enter Four Last Digits (Credit/Debit): </label>
+					
+					<input type = "text" class="form-control id="paymentMethod" placeholder="Enter Payment Method" name="paymentMethod">
+						
+					<button type="submit" class="btn btn-primary">Submit</button>
+				
+				</div>
+						
+			</div>
+		
+		</form>
+		
+		<div class="text-center">
+			<p>or</p>
+		</div>
+		
+		<form id="paymentCash">
+			
+			<div class="form-group">
+			
+				<div class="text-center">
+				
+					<label for="paymentMethod"> Enter Quantity (Cash): </label>
+					
+					<input type = "text" class="form-control id="paymentMethod" placeholder="Enter Payment Method" name="paymentMethod">
+						
+					<button type="submit" class="btn btn-primary">Submit</button>
+				
+				</div>
+						
+			</div>
+		
+		</form>
+		
+	</div>
+	
+	<div class="text-center">
+			<h2>Total: $ ___</h2>
+		</div>
+	
 </body>
 
 </html>
