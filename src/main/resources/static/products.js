@@ -2,17 +2,26 @@ $(function () {
     //localStorage.clear();
 
     $.get('/product/all', (data) => {
-        var ul = $('#itemlist');
+        var tbody = $('#products');
         data.forEach(item => {
-            var li = $('<li/>')
+            var tr = $('<tr/>')
+                .appendTo(tbody);
+            var td = $('<td/>')
                 .text(item.displayName + " ")
-                .appendTo(ul);
-            
-            $('<a/>')
+                .appendTo(tr);
+            var td = $('<td/>')
+                .text(item.price/100 + " ")
+                .appendTo(tr);
+            var td = $('<td/>')
+                .text(item.stockCount + " ")
+                .appendTo(tr);
+
+            var td = $('<a/>')
                 .text("Add")
                 .attr("href", "#")
                 .click(item.id, click)
-                .appendTo(li);
+                .appendTo(tr);
+           
         });
     });
 });
