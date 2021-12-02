@@ -1,42 +1,44 @@
-package com.cse412team18.pos.models;
+package com.cse412team18.pos.entities;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.*;
 
-import com.cse412team18.pos.models.relations.MemberReceipt;
-import com.cse412team18.pos.models.relations.ReceiptProduct;
+import com.cse412team18.pos.entities.relations.MemberReceipt;
+import com.cse412team18.pos.entities.relations.ReceiptProduct;
 
 @Entity
-@Table(name = "`Receipt`")
-public class Receipt {
+@Table(name = "receipt")
+public class Receipt implements Serializable {
     @Id
-    @Column(name = "`ReceiptID`")
+    @Column(name = "receiptid")
     private int receiptId;
 
-    @Column(name = "`PaymentMethod`")
+    @Column(name = "paymentmethod")
     private String paymentMethod;
 
-    @Column(name = "`TaxRate`")
+    @Column(name = "taxrate")
     private double taxRate;
 
-    @Column(name = "`Subtotal`")
+    @Column(name = "subtotal")
     private int subtotal;
 
-    @Column(name = "`Discount`")
+    @Column(name = "discount")
     private int discount;
 
-    @Column(name = "`CreditCardDigits`")
-    private short creditCardDigits;
+    @Column(name = "creditcarddigits")
+    private Short creditCardDigits;
 
-    @Column(name = "`SaleDate`")
+    @Column(name = "saledate")
     private Date saleDate;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    public ReceiptProduct[] products;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "receipt")
+    private Set<ReceiptProduct> receiptProducts;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    public MemberReceipt[] member;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "receipt")
+    private Set<MemberReceipt> memberReceipts;
 
     public int getReceiptId() {
         return this.receiptId;
@@ -92,5 +94,21 @@ public class Receipt {
 
     public void setSaleDate(Date saleDate) {
         this.saleDate = saleDate;
+    }
+
+    public Set<ReceiptProduct> getReceiptProducts() {
+        return this.receiptProducts;
+    }
+
+    public void setReceiptProducts(Set<ReceiptProduct> receiptProducts) {
+        this.receiptProducts = receiptProducts;
+    }
+
+    public Set<MemberReceipt> getMemberReceipts() {
+        return this.memberReceipts;
+    }
+
+    public void setMemberReceipts(Set<MemberReceipt> memberReceipts) {
+        this.memberReceipts = memberReceipts;
     }
 }

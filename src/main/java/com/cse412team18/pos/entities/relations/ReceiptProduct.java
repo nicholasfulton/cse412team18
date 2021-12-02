@@ -1,22 +1,26 @@
-package com.cse412team18.pos.models.relations;
+package com.cse412team18.pos.entities.relations;
+
+import java.io.Serializable;
 
 import javax.persistence.*;
 
-import com.cse412team18.pos.models.Product;
-import com.cse412team18.pos.models.Receipt;
+import com.cse412team18.pos.entities.Product;
+import com.cse412team18.pos.entities.Receipt;
 
 @Entity
-@Table(name = "`ReceiptProduct`")
-public class ReceiptProduct {
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "`ReceiptID`")
+@Table(name = "receiptproduct")
+public class ReceiptProduct implements Serializable {
+    @Id
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "receiptid")
     private Receipt receipt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "`ProductID`")
+    @Id
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "productid")
     private Product product;
 
-    @Column(name = "`Count`")
+    @Column(name = "count")
     private int count;
 
 

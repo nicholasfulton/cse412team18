@@ -1,4 +1,4 @@
-package com.cse412team18.pos.models;
+package com.cse412team18.pos.entities;
 
 import javax.persistence.*;
 
@@ -8,19 +8,18 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
 @Entity
-@Table(name = "`Clothing`")
+@Table(name = "clothing")
 @TypeDef(
     name = "string-array", 
     typeClass = StringArrayType.class
 )
 public class Clothing extends Product {
-    @Column(name = "`Style`")
+    @Column(name = "style")
     public String style;
 
     @Type(type = "string-array")
-    @Column(name = "`AvailableSizes`")
+    @Column(name = "availablesizes")
     public String[] availableSizes;
-
 
     public String getStyle() {
         return this.style;

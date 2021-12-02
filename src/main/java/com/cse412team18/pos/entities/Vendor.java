@@ -1,39 +1,45 @@
-package com.cse412team18.pos.models;
+package com.cse412team18.pos.entities;
+
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.*;
 
-import com.cse412team18.pos.models.relations.VendorProduct;
+import com.cse412team18.pos.entities.relations.VendorProduct;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vladmihalcea.hibernate.type.array.StringArrayType;
 
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
 @Entity
-@Table(name = "`Vendor`")
+@Table(name = "vendor")
 @TypeDef(
     name = "string-array", 
     typeClass = StringArrayType.class
 )
-public class Vendor {
+public class Vendor implements Serializable {
     @Id
-    @Column(name = "`VendorID`")
+    @Column(name = "vendorid")
     private int vendorId;
 
-    @Column(name = "`Name`", columnDefinition = "text")
+    @Column(name = "name", columnDefinition = "text")
     private String name;
 
-    @Column(name = "`Country`", columnDefinition = "text")
+    @Column(name = "country", columnDefinition = "text")
     private String country;
 
-    @Column(name = "`PhoneNumber`", columnDefinition = "text")
+    @Column(name = "phonenumber", columnDefinition = "text")
     private String phoneNumber;
-    
+
     @Type(type = "string-array")
-    @Column(name = "`Category`", columnDefinition = "text[]")
+    @Column(name = "category", columnDefinition = "text[]")
     private String[] category;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "vendor")
-    public VendorProduct[] vendorProducts;
+    @JsonIgnore
+    private Set<VendorProduct> vendorProducts;
 
     public int getVendorId() {
         return this.vendorId;
@@ -73,5 +79,21 @@ public class Vendor {
 
     public void setCategory(String[] category) {
         this.category = category;
+    }
+
+    public Set<VendorProduct> getVendorProducts() {
+        return this.vendorProducts;
+    }
+
+    public void setVendorProducts(Set<VendorProduct> vendorProducts) {
+        this.vendorProducts = vendorProducts;
+    }
+
+    public Set<Product> getProducts() {
+        Set<Product> products = new HashSet<>();
+        for (var vendorProduct : vendorProducts) {
+            products.add(vendorProduct.getProduct());
+        }
+        return products;
     }
 }

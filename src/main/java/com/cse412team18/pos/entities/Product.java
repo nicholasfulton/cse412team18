@@ -1,35 +1,38 @@
-package com.cse412team18.pos.models;
+package com.cse412team18.pos.entities;
+
+import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.*;
 
-import com.cse412team18.pos.models.relations.ReceiptProduct;
-import com.cse412team18.pos.models.relations.VendorProduct;
+import com.cse412team18.pos.entities.relations.ReceiptProduct;
+import com.cse412team18.pos.entities.relations.VendorProduct;
 
 @Entity
-@Table(name = "`Product`")
+@Table(name = "product")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Product {
+public class Product implements Serializable {
     @Id
-    @Column(name = "`ProductID`")
+    @Column(name = "productid")
     private int productId;
     
-    @Column(name = "`Price`")
+    @Column(name = "price")
     private int price;
 
-    @Column(name = "`StockCount`")
+    @Column(name = "stockcount")
     private int stockCount;
 
-    @Column(name = "`Category`")
+    @Column(name = "category")
     private String category;
 
-    @Column(name = "`DisplayName`")
+    @Column(name = "displayname")
     private String displayName;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
-    public VendorProduct[] vendorProducts;
+    private Set<VendorProduct> vendorProducts;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
-    public ReceiptProduct[] receiptProducts;
+    private Set<ReceiptProduct> receiptProducts;
 
     public int getProductId() {
         return this.productId;
@@ -69,5 +72,21 @@ public class Product {
 
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
+    }
+
+    public Set<VendorProduct> getVendorProducts() {
+        return this.vendorProducts;
+    }
+
+    public void setVendorProducts(Set<VendorProduct> vendorProducts) {
+        this.vendorProducts = vendorProducts;
+    }
+
+    public Set<ReceiptProduct> getReceiptProducts() {
+        return this.receiptProducts;
+    }
+
+    public void setReceiptProducts(Set<ReceiptProduct> receiptProducts) {
+        this.receiptProducts = receiptProducts;
     }
 }

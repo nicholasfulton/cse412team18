@@ -1,36 +1,39 @@
-package com.cse412team18.pos.models;
+package com.cse412team18.pos.entities;
+
+import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.*;
 
-import com.cse412team18.pos.models.relations.MemberReceipt;
+import com.cse412team18.pos.entities.relations.MemberReceipt;
 
 @Entity
-@Table(name = "`Member`")
-public class Member {
+@Table(name = "member")
+public class Member implements Serializable {
     @Id
-    @Column(name = "`MemberID`")
+    @Column(name = "memberid")
     private String memberId;
     
-    @Column(name = "`CreationDate`")
+    @Column(name = "creationdate")
     private String creationDate;
 
-    @Column(name = "`Birthday`")
+    @Column(name = "birthday")
     private String birthday;
 
-    @Column(name = "`Name`")
+    @Column(name = "name")
     private String name;
     
-    @Column(name = "`PhoneNumber`")
+    @Column(name = "phonenumber")
     private String phoneNumber;
 
-    @Column(name = "`Points`")
+    @Column(name = "points")
     private int points;
 
-    @Column(name = "`Address`")
+    @Column(name = "address")
     private String address;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
-    public MemberReceipt[] memberReceipts;
+    private Set<MemberReceipt> memberReceipts;
 
     public String getMemberId() {
         return this.memberId;
@@ -86,5 +89,13 @@ public class Member {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Set<MemberReceipt> getMemberReceipts() {
+        return this.memberReceipts;
+    }
+
+    public void setMemberReceipts(Set<MemberReceipt> memberReceipts) {
+        this.memberReceipts = memberReceipts;
     }
 }
