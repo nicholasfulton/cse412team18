@@ -1,7 +1,6 @@
 package com.cse412team18.pos.entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;

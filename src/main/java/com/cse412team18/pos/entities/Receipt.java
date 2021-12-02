@@ -80,11 +80,11 @@ public class Receipt implements Serializable {
         this.discount = discount;
     }
 
-    public short getCreditCardDigits() {
+    public Short getCreditCardDigits() {
         return this.creditCardDigits;
     }
 
-    public void setCreditCardDigits(short creditCardDigits) {
+    public void setCreditCardDigits(Short creditCardDigits) {
         this.creditCardDigits = creditCardDigits;
     }
 
