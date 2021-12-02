@@ -5,11 +5,13 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.cse412team18.pos.entities.Member;
 import com.cse412team18.pos.models.*;
 import com.cse412team18.pos.repositories.*;
 
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -46,5 +48,15 @@ public class DatabaseService implements IDatabaseService {
             vendorModels.add(new VendorModel(vendorFound, true));
         }
         return vendorModels;
+    }
+
+    public MemberModel getMember(String phoneNumber) {
+        Member example = new Member();
+        example.setPhoneNumber(phoneNumber);
+        var result = memberRepository.findOne(Example.of(example));
+        if (result.isPresent())
+            return new MemberModel(result.get(), false);
+        else
+            return null;
     }
 }

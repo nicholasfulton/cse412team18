@@ -8,4 +8,6 @@ public interface IDatabaseService {
     List<VendorModel> getVendors();
 
     List<ProductModel> getProducts();
+
+    MemberModel getMember(String phoneNumber);
 }
