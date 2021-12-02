@@ -1,27 +1,50 @@
 package com.cse412team18.pos.services;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.springframework.beans.factory.annotation.Value;
+import javax.transaction.Transactional;
+
+import com.cse412team18.pos.models.*;
+import com.cse412team18.pos.repositories.*;
+
+import org.hibernate.Hibernate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DatabaseService {
-    @Value("${db.url}")
-    private String url;
+@Transactional
+public class DatabaseService implements IDatabaseService {
+    @Autowired
+    private VendorRepository vendorRepository;
+    @Autowired
+    private ReceiptRepository receiptRepository;
+    @Autowired
+    private ProductRepository productRepository;
+    @Autowired
+    private MemberRepository memberRepository;
+    @Autowired
+    private FoodRepository foodRepository;
+    @Autowired
+    private ClothingRepository clothingRepository;
 
-    @Value("${db.username}")
-    private String user;
+    public List<ProductModel> getProducts() {
+        var productsFound = productRepository.findAll();
+        List<ProductModel> productModels = new ArrayList<>();
+        for (var productFound : productsFound) {
+            Hibernate.initialize(productFound);
+            productModels.add(new ProductModel(productFound, true, false));
+        }
+        return productModels;
+    }
 
-    @Value("${db.password}")
-    private String password;
-
-    Connection conn;
-
-    public DatabaseService() throws SQLException {
-        conn = DriverManager
-            .getConnection(url, user, password);
+    public List<VendorModel> getVendors() {
+        var vendorsFound = vendorRepository.findAll();
+        List<VendorModel> vendorModels = new ArrayList<>();
+        for (var vendorFound : vendorsFound) {
+            Hibernate.initialize(vendorFound);
+            vendorModels.add(new VendorModel(vendorFound, true));
+        }
+        return vendorModels;
     }
 }

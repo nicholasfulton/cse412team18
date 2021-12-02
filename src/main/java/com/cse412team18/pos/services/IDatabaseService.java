@@ -5,7 +5,7 @@ import java.util.List;
 import com.cse412team18.pos.models.*;
 
 public interface IDatabaseService {
-    List<Product> getProducts();
+    List<VendorModel> getVendors();
 
-    void createReceipt(Receipt receipt);
+    List<ProductModel> getProducts();
 }
