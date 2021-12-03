@@ -1,5 +1,5 @@
 $(function () {
-    localStorage.clear();
+    localStorage.removeItem('products');
 
     $.get('/product/all', (data) => {
         var tbody = $('#products');
@@ -30,9 +30,16 @@ $(function () {
 });
 
 function click(event) {
-    var current = localStorage.getItem(event.data.toString());
-    if (current)
-        localStorage.setItem(event.data.toString(), Number.parseInt(current) + 1);
-    else
-        localStorage.setItem(event.data.toString(), 1);
+    var productsString = localStorage.getItem('products') || '{}';
+    var products = JSON.parse(productsString);
+    if (products[event.data.toString()]) {
+        products[event.data.toString()]++;
+    }
+    else {
+        products[event.data.toString()] = 1;
+    }
+
+    localStorage.setItem('products', JSON.stringify(products));
+
+    console.log(localStorage.getItem('products'));
 }
