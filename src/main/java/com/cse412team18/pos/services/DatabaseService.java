@@ -1,20 +1,19 @@
 package com.cse412team18.pos.services;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.transaction.Transactional;
 
 import com.cse412team18.pos.entities.*;
+import com.cse412team18.pos.entities.helpers.MemberReceiptId;
+import com.cse412team18.pos.entities.helpers.ReceiptProductId;
 import com.cse412team18.pos.entities.relations.*;
 import com.cse412team18.pos.models.*;
 import com.cse412team18.pos.repositories.*;
 
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -32,6 +31,12 @@ public class DatabaseService implements IDatabaseService {
     private FoodRepository foodRepository;
     @Autowired
     private ClothingRepository clothingRepository;
+    @Autowired
+    private ReceiptProductRepository receiptProductRepository;
+    @Autowired
+    private VendorProductRepository vendorProductRepository;
+    @Autowired
+    private MemberReceiptRepository memberReceiptRepository;
 
     public int nextReceiptId() {
         int max = 0;
@@ -52,33 +57,32 @@ public class DatabaseService implements IDatabaseService {
         dbReceipt.setDiscount(receipt.getDiscount());
         dbReceipt.setCreditCardDigits(receipt.getCreditCardDigits());
         dbReceipt.setSubtotal(receipt.getSubtotal());
-        
-        Set<MemberReceipt> memberReceipts = new HashSet<>();
-        // for (var member : receipt.getMembers()) {
-        //     var memberReceipt = new MemberReceipt();
-        //     memberReceipt.setMember(memberRepository.getById(member.getId()));
-        //     memberReceipt.setReceipt(dbReceipt);
-
-        //     memberReceipts.add(memberReceipt);
-        // }
-
-        dbReceipt.setMemberReceipts(memberReceipts);
-
-        Set<ReceiptProduct> receiptProducts = new HashSet<>();
-        // for (var receiptProduct : receipt.getProducts()) {
-        //     var dbReceiptProduct = new ReceiptProduct();
-        //     dbReceiptProduct.setProduct(productRepository.findById(receiptProduct.getProduct().getId()).get());
-        //     dbReceiptProduct.setReceipt(dbReceipt);
-        //     dbReceiptProduct.setCount(receiptProduct.getCount());
-
-        //     receiptProducts.add(dbReceiptProduct);
-        // }
-
-        dbReceipt.setReceiptProducts(receiptProducts);
-
-        
+        dbReceipt.setSaleDate(receipt.getSaleDate());
 
         receiptRepository.saveAndFlush(dbReceipt);
+        
+        for (var member : receipt.getMembers()) {
+            var memberReceiptId = new MemberReceiptId();
+            memberReceiptId.setMemberId(member.getId());
+            memberReceiptId.setReceiptId(dbReceipt.getReceiptId());
+ 
+            var dbMemberReceipt = new MemberReceipt();
+            dbMemberReceipt.setId(memberReceiptId);
+
+            memberReceiptRepository.saveAndFlush(dbMemberReceipt);
+        }
+
+        for (var receiptProduct : receipt.getProducts()) {
+            var receiptProductId = new ReceiptProductId();
+            receiptProductId.setProductId(receiptProduct.getProduct().getId());
+            receiptProductId.setReceiptId(dbReceipt.getReceiptId());
+
+            var dbReceiptProduct = new ReceiptProduct();
+            dbReceiptProduct.setId(receiptProductId);
+            dbReceiptProduct.setCount(receiptProduct.getCount());
+
+            receiptProductRepository.saveAndFlush(dbReceiptProduct);
+        }
     }
 
     public List<ProductModel> getProducts() {
@@ -102,12 +106,14 @@ public class DatabaseService implements IDatabaseService {
     }
 
     public MemberModel getMember(String phoneNumber) {
-        Member example = new Member();
-        example.setPhoneNumber(phoneNumber);
-        var result = memberRepository.findOne(Example.of(example));
-        if (result.isPresent())
-            return new MemberModel(result.get(), false);
-        else
-            return null;
+        var members = memberRepository.findAll();
+        for (var member : members) {
+            if (member.getPhoneNumber().equals(phoneNumber)) {
+                Hibernate.initialize(member);
+                return new MemberModel(member, false);
+            }
+        }
+        
+        return null;
     }
 }
