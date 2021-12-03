@@ -1,69 +1,74 @@
 <!DOCTYPE HTML>
 <html lang="en">
 
-<head> 
+<head>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    	<receiptPage.js>
-	
-   	<title>The Coolest Store of all time</title>
-    
-    	<style>
-		label {
-		display:inline-block;
-		width:100px;}
+	<script src="receiptPage.js"></script>
 
-    	body {background-color: #ffffff; margin:20px;}
+	<title>The Coolest Store of all time</title>
+
+	<style>
+		label {
+			display: inline-block;
+			width: 100px;
+		}
+
+		body {
+			background-color: #ffffff;
+			margin: 20px;
+		}
 
 		.text-center {
-			text-align: center;}
-		
-    	</style>
-    	 	
-    	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    
+			text-align: center;
+		}
+
+		.hidden {
+			visibility: hidden;
+		}
+	</style>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
 </head>
+
 <body>
 
 	<div class="text-center">
-		
+
 		<h1 style="background-color:black;color:white;Font-family:impact">The Store</h1>
-		
+
 		<h4>5555 W Grove St</h4>
 		<h4>Los Santos, San Andreas 45267</h4>
-	    	<h4>555-555-5555</h4>
-	    	
-	    	<p>---------------------------------------------------------------------------------------------------------------------------------</p>
-		<label>QTY</label><label> </label><label> </label><label>ITEM</label><label> </label><label> </label><label>AMT</label>
-		<p>---------------------------------------------------------------------------------------------------------------------------------</p>
-			
-		<p>---------------------------------------------------------------------------------------------------------------------------------</p>
-	    		
+		<h4>555-555-5555</h4>
+
+		<p>---------------------------------------------------------------------------------------------------------------------------------
+		</p>
+		<label>QTY</label><label> </label><label> </label><label>ITEM</label><label> </label><label>
+		</label><label>AMT</label>
+		<p>---------------------------------------------------------------------------------------------------------------------------------
+		</p>
+
+		<div id="items">
+
+		</div>
+
+		<p>---------------------------------------------------------------------------------------------------------------------------------
+		</p>
+
 	</div>
-		<label> Sub Total:</label>
-		<p>Sales Tax:</p>
-		<p>Total:</p>
-		<p></p>
-	
+	<p>Subtotal: $<span id="subtotal"></span></p>
+	<p>Sales Tax: <span id="salesTax"></span>%</p>
+	<p>Total: $<span id="total"></span></p>
+	<p></p>
+
 	<div class="text-center">
-			<p>---------------------------------------------------------------------------------------------------------------------------------</p>  		
-	</div>
-	
-	<p>CASH</p>
-	<p>CHANGE</p>
-	<p>or</p>
-	<p>DEBIT/CREDIT</p>
-	<p>ACCOUNT:************####</p>
-	
-	<div class="text-center">
-		
-		<p>**********************************************************************************************************************************</p>
-		<p>Member:</p>
-		<p>Total points:</p>
-		<p>---------------------------------------------------------------------------------------------------------------------------------</p>    		
+		<p>---------------------------------------------------------------------------------------------------------------------------------
+		</p>
 	</div>
 
+	<p>Payment Method: <span id="paymentMethod"></span></p>
+	<p id="cardNo" class="hidden">Card Number: ************<span id="cardNoDigits"></span></p>
 </body>
 
 </html>
-	

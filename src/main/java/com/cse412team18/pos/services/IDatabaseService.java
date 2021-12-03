@@ -9,6 +9,8 @@ public interface IDatabaseService {
 
     void createReceipt(ReceiptModel receipt);
 
+    ReceiptModel getReceipt(int id);
+
     List<VendorModel> getVendors();
 
     List<ProductModel> getProducts();

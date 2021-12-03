@@ -36,7 +36,7 @@ public class ReceiptModel {
             }
         }
         else
-            products = null;
+            members = null;
     }
 
     private int id;

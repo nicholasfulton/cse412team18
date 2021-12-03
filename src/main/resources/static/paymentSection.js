@@ -88,7 +88,6 @@ function checkout() {
                 url: "/receipt",
                 data: JSON.stringify(receipt),
                 contentType: "application/json; charset=utf-8",
-                dataType: "json",
                 success: data => {
                     localStorage.clear();
                     localStorage.setItem('receiptId', receipt.id);

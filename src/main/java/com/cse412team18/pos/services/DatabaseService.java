@@ -116,4 +116,19 @@ public class DatabaseService implements IDatabaseService {
         
         return null;
     }
+
+    public ReceiptModel getReceipt(int id) {
+        var receiptOpt = receiptRepository.findById(id);
+        if (receiptOpt.isPresent()) {
+            var receipt = receiptOpt.get();
+            Hibernate.initialize(receipt.getReceiptProducts());
+            for (var receiptProduct : receipt.getReceiptProducts()) {
+                Hibernate.initialize(receiptProduct.getProduct());
+            }
+
+            return new ReceiptModel(receipt, true, false);
+        }
+        else
+            return null;
+    }
 }

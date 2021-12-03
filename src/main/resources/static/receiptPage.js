@@ -1,36 +1,48 @@
 $(function () {
-    var recId = 0;
-    $.get('/receipt/all', (data) => {//goes through every receipt and finds a new id
-        data.forEach(item => {
-            if(item.id <= recId)
-                recId = item.id + 1;
-        });
+    var receiptId = localStorage.getItem('receiptId');
+
+    $.get(`/receipt?id=${receiptId}`, data => {
+        console.log(data);
+
+        var items = $("#items");
+        for (var product of data.products) {
+            var div = $("<div/>")
+                .appendTo(items);
+            
+            $("<label/>")
+                .text(product.count)
+                .appendTo(div);
+
+            $("<label/>")
+                .appendTo(div);
+            $("<label/>")
+                .appendTo(div);
+            
+            $("<label/>")
+                .text(product.product.displayName)
+                .appendTo(div);
+
+            $("<label/>")
+                .appendTo(div);
+            $("<label/>")
+                .appendTo(div);
+
+            $("<label/>")
+                .text("$" + (product.count * product.product.price / 100).toString())
+                .appendTo(div);
+        }
+
+        $("#subtotal").text(data.subtotal / 100);
+        $("#salesTax").text(Math.round(data.taxRate * 10) / 10);
+        $("#total").text(Math.round(data.subtotal * (100 + data.taxRate) / 100) / 100);
+
+        $("#paymentMethod").text(data.paymentMethod);
+        if (data.paymentMethod !== 'cash') {
+            $("#cardNoDigits").text(data.creditCardDigits);
+            $("#cardNo").removeClass('hidden');
+        }
+        else {
+            $("#cardNo").addClass('hidden');
+        }
     });
-
-    $.get('/product/all', (data) => {
-        data.forEach(item => {
-            var itemData = localStorage.getItem(item.id);
-            if(itemData != NULL){
-                //here we should add the items to the receipt/product relationship table.
-                //the receipt id will be var recId seen above
-                //item.id will be product id
-                //count will be itemData
-                //it should also print it in the receipt
-            }
-        });
-    });
-
-    var sql = "INSERT INTO Receipt VALUES ( " + recID + ", '" + Number.parseInt(localStorage.getItem(paymentMethod)) + "', 8.1, " + Number.parseInt(localStorage.getItem(subtotal)) + ", 0, " + Number.parseInt(localStorage.getItem(lastFour)) + ", '2021-12-03')";
-    //not 100% sure on how to run this query inot the database?
-
-    //also not sure how to format the printing properly, so here is the data
-    //What's needed to print in the receipt page and where it's stored:
-    var subTotalPrint = Number.parseInt(localStorage.getItem(subtotal)) / 100;
-    var salesTaxPrint = 8.1;
-    var totalPrint = (Number.parseInt(localStorage.getItem(subtotal)) / 100) * 1.081;
-    if(Number.parseInt(localStorage.getItem(cashPaid)) != 0){
-        var cashPrint = Number.parseInt(localStorage.getItem(cashPaid));
-        var changePrint = totalPrint - cashPrint;
-    }
-    var lastDigitPrint = Number.parseInt(localStorage.getItem(lastFour));
 });
