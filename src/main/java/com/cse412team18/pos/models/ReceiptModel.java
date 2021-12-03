@@ -7,6 +7,9 @@ import java.util.Set;
 import com.cse412team18.pos.entities.Receipt;
 
 public class ReceiptModel {
+    public ReceiptModel() 
+    { }
+
     public ReceiptModel(Receipt receipt, boolean includeProducts, boolean includeMembers) {
         id = receipt.getReceiptId();
         paymentMethod = receipt.getPaymentMethod();
@@ -19,7 +22,7 @@ public class ReceiptModel {
         if (includeProducts) {
             products = new HashSet<>();
             for (var receiptProduct : receipt.getReceiptProducts()) {
-                products.add(new ProductModel(receiptProduct.getProduct(), true, false));
+                products.add(new ReceiptProductModel(receiptProduct));
             }
         }
         else
@@ -49,7 +52,7 @@ public class ReceiptModel {
 
     private Date saleDate;
 
-    private Set<ProductModel> products;
+    private Set<ReceiptProductModel> products;
 
     private Set<MemberModel> members;
 
@@ -109,11 +112,11 @@ public class ReceiptModel {
         this.saleDate = saleDate;
     }
 
-    public Set<ProductModel> getProducts() {
+    public Set<ReceiptProductModel> getProducts() {
         return this.products;
     }
 
-    public void setProducts(Set<ProductModel> products) {
+    public void setProducts(Set<ReceiptProductModel> products) {
         this.products = products;
     }
 

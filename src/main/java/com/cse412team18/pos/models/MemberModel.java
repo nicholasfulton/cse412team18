@@ -6,6 +6,9 @@ import java.util.Set;
 import com.cse412team18.pos.entities.Member;
 
 public class MemberModel {
+    public MemberModel()
+    { }
+
     public MemberModel(Member member, boolean includeReceipts) {
         id = member.getMemberId();
         creationDate = member.getCreationDate();
@@ -25,7 +28,7 @@ public class MemberModel {
             receipts = null;
     }
 
-    private String id;
+    private int id;
     
     private String creationDate;
 
@@ -41,11 +44,11 @@ public class MemberModel {
 
     private Set<ReceiptModel> receipts;
 
-    public String getId() {
+    public int getId() {
         return this.id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

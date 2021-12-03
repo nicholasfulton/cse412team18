@@ -6,6 +6,9 @@ import java.util.Set;
 import com.cse412team18.pos.entities.Product;
 
 public class ProductModel {
+    public ProductModel()
+    { }
+
     public ProductModel(Product product, boolean includeVendors, boolean includeReceipts) {
         id = product.getProductId();
         price = product.getPrice();
