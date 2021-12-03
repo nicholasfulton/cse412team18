@@ -53,6 +53,12 @@ function checkout() {
         saleDate: new Date().toISOString()
     };
 
+    var memberStr = localStorage.getItem('member');
+    if (memberStr != 'null') {
+        var member = JSON.parse(memberStr);
+        receipt.members.push(member);
+    }
+
     if (paymentMethod === 'card') {
         var digitsText = $("#cardDigitsInput").val();
         if (digitsText) {
@@ -84,7 +90,10 @@ function checkout() {
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: data => {
-                    console.log(data);
+                    localStorage.clear();
+                    localStorage.setItem('receiptId', receipt.id);
+                    
+                    window.location.href = "/receiptPage.html";
                 },
                 error: err => {
                     console.log(err);
