@@ -35,45 +35,25 @@
 			<p> Are you a member? Please enter phone number: </p>
 	    	<p>Ex. +1234567890</p>
 		
-			<form action="/index">
+			<div class="form-group text-center">
+				<input type="phoneNumber" class="form-control" id="phoneNumber" placeholder="Enter Phone Number" name="phoneNumber">
 			
-				<div class="form-group">
-				
-					<label for="phoneNumber"></label>
-					
-					<div class="text-center">
-					
-						<input type="phoneNumber" class="form-control" id="phoneNumber" placeholder="Enter Phone Number" name="phoneNumber">
-					
-						<a href="/products.html">
-							<button type="submit" onclick="member(document.getElementsByName('phoneNumber')[0].value)" class="btn btn-primary">Submit</button>
-						</a>
-					</div>
-					
-				</div>	
-				
-			</form>
+				<button type="button" id="submit">Submit</button>
+			</div>
 			
 		</div>
 		
 	</div>
-	
-	<p></p>
+
+	<br />
 	
 	<div class="text-center">
-	
-		<label> if not a member, then continue</label>
-		
-		<p></p>
-	
-		<a href="/products.html">
-		
-				<button>Continue</button>
-		</a>
-		
-	</div>
-		
+		<label> If not a member, then skip</label>
 
+		<br />
+	
+		<button type="button" id="skip">Skip</button>
+	</div>
 </body>
 
 </html>
