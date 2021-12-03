@@ -22,7 +22,7 @@ $(function () {
             $('<a/>')
                 .text("Add")
                 .attr("href", "#")
-                .click(item.id, click)
+                .click(item, click)
                 .appendTo(td);
            
         });
@@ -32,11 +32,14 @@ $(function () {
 function click(event) {
     var productsString = localStorage.getItem('products') || '{}';
     var products = JSON.parse(productsString);
-    if (products[event.data.toString()]) {
-        products[event.data.toString()]++;
+    if (products[event.data.id.toString()]) {
+        products[event.data.id.toString()].count++;
     }
     else {
-        products[event.data.toString()] = 1;
+        products[event.data.id.toString()] = {
+            count: 1,
+            product: event.data
+        };
     }
 
     localStorage.setItem('products', JSON.stringify(products));
