@@ -12,7 +12,7 @@ import com.cse412team18.pos.entities.relations.MemberReceipt;
 public class Member implements Serializable {
     @Id
     @Column(name = "memberid")
-    private String memberId;
+    private int memberId;
     
     @Column(name = "creationdate")
     private String creationDate;
@@ -35,11 +35,11 @@ public class Member implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
     private Set<MemberReceipt> memberReceipts;
 
-    public String getMemberId() {
+    public int getMemberId() {
         return this.memberId;
     }
 
-    public void setMemberId(String memberId) {
+    public void setMemberId(int memberId) {
         this.memberId = memberId;
     }
 
