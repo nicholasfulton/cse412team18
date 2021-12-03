@@ -10,7 +10,7 @@ $(function () {
                 .text(item.displayName + " ")
                 .appendTo(tr);
             var td = $('<td/>')
-                .text(item.price/100 + " ")
+                .text("\t$" + item.price/100 + " ")
                 .appendTo(tr);
             var td = $('<td>')
                 .text(item.stockCount + " ")
