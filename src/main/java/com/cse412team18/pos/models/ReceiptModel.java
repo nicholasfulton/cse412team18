@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.cse412team18.pos.entities.Receipt;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class ReceiptModel {
     public ReceiptModel() 
@@ -50,6 +51,7 @@ public class ReceiptModel {
 
     private Short creditCardDigits;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     private Date saleDate;
 
     private Set<ReceiptProductModel> products;
